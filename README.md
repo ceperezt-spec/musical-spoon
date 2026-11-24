@@ -1,12 +1,12 @@
-# Proyecto MLOps – Semana 2: Pipeline automatizado y calidad de datos
+# Actividad 2.1: Estandarización de Pipelines y Control de Calidad de Datos
 
-**Seminario de Grado A2** – Calidad, integración y gobernanza de datos en un entorno distribuido.
-**Autor:** Cesar Andres Perez Tierradentro · **Fecha:** 01/11/2026
+**Seminario de Grado A2** – 
+**Autor:** Cesar Andres Perez Tierradentro · **Fecha:** 24/11/2026
 
 Pipeline reproducible que valida datos de entrada (sin librerías externas), ejecuta pruebas y entrena un
 `RandomForestClassifier` sobre el dataset **Iris**, registrando todo en **MLflow**. Todo se ejecuta con **un solo comando**.
 
-## 1. Estructura del repositorio
+# 1. Estructura del repositorio
 
 ```
 ├── pipeline.py          # Orquestador multiplataforma (validar → probar → entrenar)
@@ -19,7 +19,7 @@ Pipeline reproducible que valida datos de entrada (sin librerías externas), eje
 └── README.md
 ```
 
-## 2. Requisitos previos
+# 2. Requisitos previos act
 
 | Requisito | Versión |
 |-----------|---------|
@@ -27,12 +27,12 @@ Pipeline reproducible que valida datos de entrada (sin librerías externas), eje
 | Git | cualquiera |
 | make (opcional) | solo si usas el Makefile; en Windows usa `python pipeline.py` |
 
-## 3. Reproducción desde cero
+# 3. Reproducción desde cero
 
 ```bash
 # 1. Clonar
-git clone <URL_DEL_REPOSITORIO>
-cd <NOMBRE_DEL_REPOSITORIO>
+git clone https://github.com/ceperezt-spec/musical-spoon.git
+cd musical-spoon
 
 # 2. Crear y activar entorno virtual
 python -m venv .venv
@@ -46,13 +46,13 @@ pip install -r requirements.txt    # o: make install
 python pipeline.py                 # o: make all
 ```
 
-Parámetros opcionales de entrenamiento (se pasan al final):
+Parámetros opcionales de entrenamiento:
 
 ```bash
 python pipeline.py --n_estimators 200 --max_depth 5 --run_name prueba_1
 ```
 
-### Qué hace el pipeline
+# Qué hace el pipeline
 
 | Paso | Acción | Falla si… |
 |------|--------|-----------|
@@ -63,7 +63,7 @@ python pipeline.py --n_estimators 200 --max_depth 5 --run_name prueba_1
 
 Si un paso falla, el pipeline se detiene con código de salida 1.
 
-### Comandos individuales (Makefile)
+# Comandos individuales (Makefile)
 
 ```bash
 make validate-data     # solo validación de datos
@@ -71,7 +71,7 @@ make test              # solo pruebas
 make train ARGS="--n_estimators 200"
 ```
 
-## 4. Validación de datos
+# 4. Validación de datos
 
 `data_validation.py` usa únicamente la biblioteca estándar y verifica, según `data_contract.json`:
 
@@ -85,7 +85,7 @@ python data_validation.py --examples                       # ejemplos del contra
 python data_validation.py --input '{"sepal_length_cm":5.1,"sepal_width_cm":3.5,"petal_length_cm":1.4,"petal_width_cm":0.2}'
 ```
 
-## 5. Contrato de datos (`data_contract.json`)
+# 5. Contrato de datos (`data_contract.json`)
 
 | Variable | Tipo | Nulo | Rango |
 |----------|------|------|-------|
@@ -97,7 +97,7 @@ python data_validation.py --input '{"sepal_length_cm":5.1,"sepal_width_cm":3.5,"
 Salida: `prediction` ∈ {0: setosa, 1: versicolor, 2: virginica}. El archivo incluye `examples.valid_input`,
 `examples.invalid_input` y los errores esperados para este último. Cualquier cambio al esquema debe incrementar `version`.
 
-## 6. Resultados en MLflow
+# 6. Resultados en MLflow
 
 La base local es `mlflow.db` (se crea sola con SQLite). Para visualizar las corridas:
 
