@@ -1,9 +1,10 @@
 """
 SEMINARIO DE GRADO A2
-Calidad, integración y gobernanza de datos en un entorno distribuido.
+Act 1- Calidad, integración y gobernanza de datos en un entorno distribuido.
+Act 2 - Estandarización de Pipelines y Control de Calidad de Datos
 Hecho por :
 Cesar Andres Perez Tierradentro
-01/11/2026
+25/11/2026
 """
 import argparse
 import os
